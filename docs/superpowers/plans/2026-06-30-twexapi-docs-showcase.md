@@ -258,7 +258,7 @@ test('authentication examples use safe fake credentials only', () => {
   assert.ok(html.includes('Authorization: Bearer $TWEXAPI_KEY'));
   assert.ok(html.includes('twexapi_demo_key'));
   assert.doesNotMatch(html, /twitterx_[a-f0-9]{20,}/i);
-  assert.doesNotMatch(html, /sk_live_[a-z0-9]+/i);
+  assert.doesNotMatch(html, new RegExp('sk_' + 'live_[a-z0-9]+', 'i'));
   assert.doesNotMatch(html, /sk-[A-Za-z0-9]{20,}/);
 });
 
@@ -1467,7 +1467,7 @@ Expected: PASS with 11 passing tests across 5 test files.
 Run:
 
 ```bash
-rg -n "twitterx_[a-f0-9]{20,}|sk_live_|sk-[A-Za-z0-9]{20,}" .
+rg -n "twitterx_[a-f0-9]{20,}|sk[_]live_|sk-[A-Za-z0-9]{20,}" .
 ```
 
 Expected: no matches.
